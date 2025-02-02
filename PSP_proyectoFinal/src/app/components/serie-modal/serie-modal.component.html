@@ -1,0 +1,142 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header text-danger ">
+      <div >
+        <h4 class="modal-title mb-1 ">
+          {{ editar ? 'Editar Serie: ' : 'Nueva Serie' }}
+          @if (editar && serie) {
+            <small class="Titulo">{{  serie.titulo }}</small>
+          }
+        </h4>
+      </div>
+
+      <button type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="activeModal.dismiss()">
+      </button>
+    </div>
+
+
+    <div class="modal-body">
+      <form [formGroup]="formSerie" (ngSubmit)="onSubmit()">
+        <!-- Campos básicos -->
+        <div class="form-floating mb-3">
+          <input formControlName="titulo" type="text" class="form-control" id="titulo" placeholder="Título">
+          <label for="titulo">Título</label>
+        </div>
+
+        <!-- Manejo de Imágenes -->
+        <div class="row mb-3">
+          <div class="col-8">
+            <div class="input-group">
+              <input type="text" class="form-control" #newImage placeholder="URL de imagen" id="newImage">
+              <button class="btn btn-outline-primary" type="button" (click)="addImage(newImage.value)">
+                <fa-icon [icon]="faPlusCircle"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="d-flex flex-wrap gap-2">
+              @for (imagen of imagenes.value; track $index) {
+                <div class="position-relative">
+                  <img [src]="imagen" class="img-thumbnail" style="height: 100px">
+                  <button class="btn btn-danger btn-sm position-absolute top-0 end-0" type="button"
+                          (click)="removeImage($index)">×</button>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Campos numéricos y fecha -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input formControlName="numeroCapitulos" type="number" class="form-control" id="numeroCapitulos">
+              <label for="numeroCapitulos">Número de Capítulos</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input formControlName="fechaEmision" type="date" class="form-control" id="fechaEmision">
+              <label for="fechaEmision">Fecha de Emisión</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manejo de Categorías -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <!-- Selector de categorías existentes -->
+            <div>
+              <label for="categoriaSelect">Categorías</label>
+              <select class="form-select" id="categoriaSelect"
+                      multiple
+                      formControlName="categorias">
+                @for (categoria of categoriasDisponibles;track $index){
+                  @if(categoria){
+                    <option [ngValue]="categoria">{{ categoria.nombre }}</option>
+                  }
+                }
+              </select>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="col-8">
+                <div [formGroup]="myNewCategoria">
+                  <div class="position-relative mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="newCategoriaNombre"
+                      formControlName="nombre"
+                      placeholder="Añadir Nombre nueva Categoria">
+
+                    <div class="position-absolute top-0 end-0 d-flex align-items-center h-100 me-2">
+                      <fa-icon [icon]="faPlusCircle"
+                               class="pointer text-success fs-5"
+                               (click)="addCategoria()">
+                      </fa-icon>
+                    </div>
+                  </div>
+
+                  <div class="text-primary mb-2" style="font-size: 0.9em;">
+
+                  </div>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newCategoriaImagen"
+                    formControlName="imagen"
+                    placeholder="URL imagen Categoria">
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <!-- Sinopsis -->
+            <div class="form-floating mb-3 mt-4">
+          <textarea formControlName="sinopsis" class="form-control"
+                    id="sinopsis" style="height: 100px"></textarea>
+              <label for="sinopsis">Sinopsis</label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="onCanel()">objeto</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()" >Cancelar</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+        {{ editar ? 'Guardar Cambios' : 'Crear Serie' }}
+      </button>
+    </div>
+  </div>
+</div>

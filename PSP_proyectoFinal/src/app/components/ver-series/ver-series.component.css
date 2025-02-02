@@ -1,0 +1,123 @@
+.border{
+  box-shadow: 2px 2px lightblue
+
+}
+
+.row:hover, .pointer:hover{
+  cursor: pointer;
+}
+
+.border:hover{
+  box-shadow: 2px 2px darkgrey;
+  border-color: darkblue;
+
+}
+
+.card {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 250px;
+}
+
+.image-container {
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gris{
+  color: lightgray;
+}
+
+
+.card-img {
+  width: 700px;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carousel, .carousel-inner, .carousel-item {
+  height: 100%;
+}
+
+
+.boton-flotante {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-flotante:hover {
+  transform: scale(1.1);
+  background-color: mediumblue;
+}
+
+.contador-de-series {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 16px;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: bold;
+  z-index: 1000;
+}
+
+.custom-btn {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  transform-origin: center;
+}
+
+.custom-btn:hover {
+  background-color: mediumblue;
+  color: white;
+  border-color: #007bff;
+  transform: scale(1.1);
+  cursor: alias;
+}
+
+.categorias-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.categoria-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categoria-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+
+
+

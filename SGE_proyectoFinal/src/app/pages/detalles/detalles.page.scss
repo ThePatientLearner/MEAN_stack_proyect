@@ -1,0 +1,163 @@
+.serie-card {
+  margin: 16px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.serie-imagen {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.serie-titulo {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--ion-color-dark);
+  margin-bottom: 10px;
+}
+
+// Contenedor de categorías simplificado
+.categorias-container {
+  margin: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.categoria-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 6px;
+  object-fit: cover;
+}
+
+// Contenedor de información más minimalista
+.info-container {
+  margin: 12px 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--ion-color-light);
+  border-radius: 6px;
+
+  h3 {
+    margin: 0;
+    font-size: 0.95em;
+    font-weight: 500;
+  }
+}
+
+// Contenedor de sinopsis simplificado
+.sinopsis-container {
+  margin-top: 20px;
+
+  h3 {
+    color: var(--ion-color-dark);
+    font-size: 0.95em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  p {
+    line-height: 1.5;
+    color: var(--ion-color-medium);
+    margin: 0;
+    font-size: 0.9em;
+  }
+}
+
+// Chips más compactos
+ion-chip {
+  padding: 6px 10px;
+  height: auto;
+  min-height: 36px;
+  --background: var(--ion-color-light);
+}
+
+// Mensaje de error centrado
+h3.error-message {
+  color: #0066cc;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .serie-imagen {
+    height: 300px;
+  }
+
+  .serie-titulo {
+    font-size: 1.5em;
+  }
+
+  .info-container,
+  .sinopsis-container {
+    margin: 10px 0;
+  }
+}
+
+ion-fab-button {
+  --background: #ffffff;
+  --box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2);
+  --transition: 0.3s ease-in-out;
+  width: 56px;  // Aumentar el tamaño del botón
+  height: 56px; // Aumentar el tamaño del botón
+
+  ion-icon {
+    font-size: 28px; // Aumentar el tamaño del icono
+    width: 28px;    // Asegurar el ancho
+    height: 28px;   // Asegurar el alto
+  }
+
+  &[color="facebook"] {
+    --background: #3b5998;
+    --color: #ffffff;
+  }
+
+  &[color="github"] {
+    --background: #333333;
+    --color: #ffffff;
+  }
+
+  &:hover {
+    --background-hover: var(--background);
+    --opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+ion-fab-button a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+
+  ion-icon {
+    font-size: 100px; // Asegurar que los iconos dentro de enlaces también sean grandes
+  }
+}
+
+.badge-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  padding: 2.5px;
+}
+
+ion-badge {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px grey;
+  color: white;
+}

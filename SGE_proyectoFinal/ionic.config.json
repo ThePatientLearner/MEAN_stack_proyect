@@ -1,0 +1,7 @@
+{
+  "name": "SGE_proyectoFinal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

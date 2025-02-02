@@ -1,0 +1,137 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if(serie){
+    <ion-card>
+      @if(puntuacionMedia !== -1){
+      <div class="badge-container">
+        <ion-badge color="success">{{ puntuacionMedia | number:'1.1-1' }}</ion-badge>  <!-- para que solo muestre 1 decimal de la media-->
+      </div>
+      }@else{
+      }
+          <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <swiper-container>
+              @for (imagen of serie.imagenes; track $index) {
+                <swiper-slide>
+                  <ion-img [src]="imagen" class="serie-imagen"></ion-img>
+                </swiper-slide>
+              }
+            </swiper-container>
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-card-header>
+              <ion-card-title class="serie-titulo">{{ serie.titulo }}</ion-card-title>
+              <ion-card-subtitle>
+                Fecha de emisión: {{ serie.fechaEmision | date:'longDate' }}
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="categorias-container">
+                <ion-chip *ngFor="let categoria of serie.categorias" color="primary">
+                  <ion-img [src]="categoria.imagen" class="categoria-icon"></ion-img>
+                  <ion-label>{{ categoria.nombre }}</ion-label>
+                </ion-chip>
+              </div>
+
+              <div class="info-container">
+                <ion-text color="medium">
+                  <h3>Número de capítulos: {{ serie.numeroCapitulos }}</h3>
+                </ion-text>
+              </div>
+
+              <div class="sinopsis-container">
+                <h3>Sinopsis</h3>
+                <p>{{ serie.sinopsis }}</p>
+              </div>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+
+    <!-- Añadir después del contenido de la serie -->
+    <ion-button expand="block" (click)="setOpen(true)" class="rating-button">
+      Puntuar Serie
+    </ion-button>
+
+    <!-- El fab pra poner las redes sciales-->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="Add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button color="facebook">
+          <a href="https://www.facebook.com" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+        </ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="start">
+        <ion-fab-button color="github">
+          <a href="https://github.com/ThePatientLearner?tab=repositories" target="_blank"> <ion-icon name="logo-github"></ion-icon></a>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+
+    <ion-modal [isOpen]="isModalOpen" [breakpoints]="[0, 0.4]" [initialBreakpoint]="0.4">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Puntuar Serie</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <form [formGroup]="ratingForm" (ngSubmit)="submitRating()">
+            <ion-item class="ion-margin-bottom">
+              <ion-input
+                type="email"
+                formControlName="email"
+                pattern="[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                label="Email"
+                labelPlacement="floating"
+                errorText="Email inválido"
+                required="true"
+                placeholder="ejemplo@correo.com">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Puntuación: {{ratingForm.get('rating')?.value}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-range
+                formControlName="rating"
+                [min]="1"
+                [max]="10"
+                [pin]="true"
+                [snaps]="true"
+                [ticks]="true">
+              </ion-range>
+            </ion-item>
+
+            <ion-button
+              class="ion-margin-top"
+              expand="block"
+              type="submit"
+              [disabled]="!ratingForm.valid">
+              Enviar Puntuación
+            </ion-button>
+          </form>
+        </ion-content>
+
+      </ng-template>
+    </ion-modal>
+
+  }@else{
+  <h3>Serie no encontrada...</h3>
+}
+</ion-content>

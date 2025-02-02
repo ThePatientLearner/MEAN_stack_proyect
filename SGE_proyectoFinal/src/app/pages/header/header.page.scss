@@ -1,0 +1,42 @@
+h1 {
+  border-radius: 6.5px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+
+  span {
+    color: #0066ff;
+    font-size:1.7rem;
+  }
+}
+
+ion-menu-button {
+  --color: var(--ion-color-primary);
+  display: block !important;
+}
+
+ion-back-button {
+  --color: var(--ion-color-primary);
+}
+
+ion-icon{
+  color: blue;
+  cursor: pointer;
+}
+
+.avatar-contenedor{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+  cursor: pointer;
+}
+
+ion-avatar {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+

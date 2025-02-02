@@ -1,0 +1,192 @@
+@defer (when data) {
+
+  <button (click)="newSerie()" class="boton-flotante">
+    <i class="fas fa-plus"><br>Serie</i>
+  </button>
+
+
+  <div class="contador-de-series">
+    Nº de series: {{ series.length }}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      @for (serie of series; track serie._id) {
+        <div class="col-md-6 mb-3">
+          <div class="card mt-4">
+            <div id="carousel-{{serie._id}}" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                @for (imagen of serie.imagenes; track $index) {
+                  <div class="carousel-item" [class.active]="$index === 0">
+                    <img src="{{imagen || '/images/imagenNoEncontrada.jpg'}}"
+                         class="card-img"
+                         alt="{{serie.titulo}} imagen {{$index + 1}}">
+                  </div>
+                }
+              </div>
+              <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + serie._id" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + serie._id" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title pointer">{{ serie.titulo }}</h5>
+              <div class="categorias-container">
+                @for (categoria of serie.categorias; track $index){
+                  <div class="categoria-item">
+                    <img [src]="categoria.imagen"
+                         class="categoria-img"
+                         [alt]="categoria.nombre">
+                    <span class="badge bg-danger">{{ categoria.nombre }}</span>
+                  </div>
+                }
+              </div>
+              <p class="card-text mt-2">
+                <small class="text-muted">
+                  Fecha de lanzamiento: {{ serie.fechaEmision | date:'dd/MM/yyyy' }} - Capítulos: {{ serie.numeroCapitulos }}
+                </small>
+              </p>
+              <p class="card-text">{{ serie.sinopsis }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn custom-btn" (click)="loadSerie(serie)">
+                  Editar Serie
+                </button>
+                <fa-icon [icon]="faTrashCan"
+                         (click)="removeSerie(serie)"
+                         class="text-danger fs-4 pointer">
+                </fa-icon>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+} @placeholder () {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando series...</span>
+    </div>
+  </div>
+}
+
+<!-- PUNTUACIONES
+         <div class="col-md-1 d-flex align-items-center">
+
+         <span class="badge rounded-1 p-2 fs-5"
+               [ngClass]="{'bg-success': movie.imdb.rating >= 8,
+                          'bg-warning': movie.imdb.rating < 8 && movie.imdb.rating >= 6,
+                          'bg-danger': movie.imdb.rating < 6}">
+           {{ movie.imdb.rating }}
+         </span>
+         </div>
+         -->
+
+<!--
+  <div class="container-fluid">
+    <div class="d-flex w-100">
+      <h3 class="mt-2 me-auto d-inline">{{movies.length}} series</h3>
+      <h3 class="d-inline-block ms-auto pointer">
+        <button (click)="newSerie()"
+                class="btn-outline-success">
+          Añadir serie
+        </button>
+      </h3>
+    </div>
+  </div>
+  <div class="container">
+    @for (movie of movies; track movie._id) {
+      <div class="row border rounded my-2">
+        <div class="col-md-2 align-self-center">
+          <img src="{{movie.poster || '/images/imagenNoEncontrada.jpg' }}" alt="{{movie.title}}" class="img-fuid">
+        </div>
+        <div (click)="loadMovie(movie)" class="col-md-8">
+          <div class="row mt-3 pt-2">
+            <div class="col-md-12 pb2">
+              <h5>{{ movie.title }}</h5>
+              <small class="text-danger">{{ movie.genres }}</small>
+              <p><b>Director: </b>{{ movie.director }} - <b>Year: </b> {{ movie.year }}</p>
+              <small>{{ movie.plot }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 align-self-center">
+        <small [ngClass]="{'bg-success': movie.imdb.rating >=6, 'bg-warning' : movie.imdb.rating<6&&movie.imdb.rating>=4, 'bg-danger': movie.imdb.rating<4}"
+               class="badge p-3">
+          {{movie.imdb.rating}}
+        </small>
+      </div>
+
+    }
+  </div>
+  -->
+
+
+
+
+
+
+<!--
+<body>
+  @for(movie of movies; track $index){
+    <div class="card mb-3 m-3" style="max-width: 540px;">
+      <div class="row g-0 justify-content-around">
+        <div class="col-md-4">
+          <img src="{{movie.poster}}" class="img-fluid rounded-start" alt="no se encuentra la imagen">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{movie.title}}</h5>
+            <p class="card-text">{{movie.director}}</p>
+            <p class="card-text"><small class="text-muted">Número de capítulos: {{movie.year}}</small></p>
+            <div class="d-flex justify-content-end mt-2">
+              <button class="btn btn-primary me-2" (click)="editarSerie('movie')">
+                <i class="bi bi-pencil-fill"></i> Editar
+              </button>
+              <button class="btn btn-danger" (click)="borrarSerie(movie.title)">
+                <i class="bi bi-trash-fill"></i> Borrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+-->
+
+<!-- Bucle tarjetas series
+  @for(serie of series; track $index){
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{serie.imagenes}}" class="img-fluid rounded-start" alt="{{serie.titulo}}">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{serie.titulo}}</h5>
+            <p class="card-text">{{serie.sinopsis}}</p>
+            <p class="card-text"><small class="text-muted">Número de capítulos: {{serie.capitulos}}</small></p>
+            <div class="d-flex justify-content-end mt-2">
+              <button class="btn btn-primary me-2" (click)="editarSerie(serie)">
+                <i class="bi bi-pencil-fill"></i> Editar
+              </button>
+              <button class="btn btn-danger" (click)="borrarSerie(serie.titulo)">
+                <i class="bi bi-trash-fill"></i> Borrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }
+    -->
+
+
